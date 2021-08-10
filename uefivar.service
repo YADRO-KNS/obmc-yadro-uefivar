@@ -1,0 +1,11 @@
+[Unit]
+Description=UEFI variable storage
+
+[Service]
+ExecStart=/usr/bin/env uefivar
+Restart=always
+Type=dbus
+BusName=xyz.openbmc_project.UefiVar
+
+[Install]
+WantedBy=multi-user.target
