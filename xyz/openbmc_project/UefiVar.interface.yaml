@@ -1,0 +1,123 @@
+description: >
+    UEFI variable storage.
+
+methods:
+    - name: GetVariable
+      description: >
+        Get UEFI variable.
+      parameters:
+        - name: name
+          type: string
+          description: >
+              Name of the variable.
+        - name: guid
+          type: array[byte]
+          description: >
+              Vendor GUID of the variable.
+      returns:
+        - name: attributes
+          type: uint32
+          description: >
+              Variable attributes.
+        - name: data
+          type: array[byte]
+          description: >
+              Variable data.
+      errors:
+        - xyz.openbmc_project.Common.Error.InvalidArgument
+        - xyz.openbmc_project.Common.Error.ResourceNotFound
+        - xyz.openbmc_project.Common.Error.NotAllowed
+
+    - name: SetVariable
+      description: >
+        Set UEFI variable.
+      parameters:
+        - name: name
+          type: string
+          description: >
+              Name of the variable.
+        - name: guid
+          type: array[byte]
+          description: >
+              Vendor GUID of the variable.
+        - name: attributes
+          type: uint32
+          description: >
+              Variable attributes.
+        - name: data
+          type: array[byte]
+          description: >
+              Value of the variable, empty variable are removed.
+      errors:
+        - xyz.openbmc_project.Common.Error.InvalidArgument
+        - xyz.openbmc_project.Common.Error.InternalFailure
+
+    - name: RemoveVariable
+      description: >
+        Remove UEFI variable.
+      parameters:
+        - name: name
+          type: string
+          description: >
+              Name of the variable.
+        - name: guid
+          type: array[byte]
+          description: >
+              Vendor GUID of the variable.
+      errors:
+        - xyz.openbmc_project.Common.Error.InvalidArgument
+        - xyz.openbmc_project.Common.Error.InternalFailure
+
+    - name: NextVariable
+      description: >
+        Get next UEFI variable.
+      parameters:
+        - name: name
+          type: string
+          description: >
+              The last Variable name that was returned by NextVariable().
+        - name: guid
+          type: array[byte]
+          description: >
+              The last Vendor GUID that was returned by NextVariable().
+      returns:
+        - name: name
+          type: string
+          description: >
+              Name of the next variable.
+        - name: guid
+          type: array[byte]
+          description: >
+              Vendor GUID of the next variable.
+      errors:
+        - xyz.openbmc_project.Common.Error.InvalidArgument
+        - xyz.openbmc_project.Common.Error.NotAllowed
+        - xyz.openbmc_project.Common.Error.ResourceNotFound
+
+    - name: Reset
+      description: >
+        Reset storage to defaults (remove all variables).
+      errors:
+        - xyz.openbmc_project.Common.Error.InternalFailure
+
+    - name: UpdateVars
+      description: >
+        Update variables to the new format.
+      parameters:
+        - name: file
+          type: string
+          description: >
+              Path to the NVRAM dump of the new BIOS version.
+      errors:
+        - xyz.openbmc_project.Common.Error.InternalFailure
+
+    - name: ImportVars
+      description: >
+        Import variables from the existing NVRAM dump.
+      parameters:
+        - name: file
+          type: string
+          description: >
+              Path to the NVRAM dump of the existing BIOS image.
+      errors:
+        - xyz.openbmc_project.Common.Error.InternalFailure
