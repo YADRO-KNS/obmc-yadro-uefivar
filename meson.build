@@ -29,19 +29,19 @@ endif
 sdbuspp = find_program('sdbus++', native: true)
 sdbus_hpp = custom_target(
   'sdbus_hpp',
-  input: 'xyz/openbmc_project/UefiVar.interface.yaml',
+  input: 'com/yadro/UefiVar.interface.yaml',
   output: 'server.hpp',
   capture: true,
   command: [sdbuspp, '-r', meson.current_source_dir(),
-                     'interface', 'server-header', 'xyz.openbmc_project.UefiVar'],
+                     'interface', 'server-header', 'com.yadro.UefiVar'],
 )
 sdbus_cpp_in = custom_target(
   'sdbus_cpp_in',
-  input: 'xyz/openbmc_project/UefiVar.interface.yaml',
+  input: 'com/yadro/UefiVar.interface.yaml',
   output: 'server.cpp.in',
   capture: true,
   command: [sdbuspp, '-r', meson.current_source_dir(),
-                     'interface', 'server-cpp', 'xyz.openbmc_project.UefiVar'],
+                     'interface', 'server-cpp', 'com.yadro.UefiVar'],
 )
 sed = find_program('sed', native: true)
 sdbus_cpp = custom_target(
@@ -49,7 +49,7 @@ sdbus_cpp = custom_target(
   input: sdbus_cpp_in,
   output: 'server.cpp',
   capture: true,
-  command: [sed, 's#<xyz/openbmc_project/UefiVar/server.hpp>#<server.hpp>#',
+  command: [sed, 's#<com/yadro/UefiVar/server.hpp>#<server.hpp>#',
                  '@INPUT@'],
 )
 

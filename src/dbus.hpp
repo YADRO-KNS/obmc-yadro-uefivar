@@ -7,7 +7,7 @@
 #include "storage.hpp"
 
 using Super = sdbusplus::server::object_t<
-    sdbusplus::xyz::openbmc_project::server::UefiVar>;
+    sdbusplus::com::yadro::server::UefiVar>;
 
 /**
  * @brief Implementation of xyz.openbmc_project.UefiVar interface.
@@ -16,10 +16,10 @@ class DBus : public Super
 {
   public:
     /** @brief D-Bus interface name. */
-    static constexpr const char* interfaceName = "xyz.openbmc_project.UefiVar";
+    static constexpr const char* interfaceName = "com.yadro.UefiVar";
 
     /** @brief D-Bus object path. */
-    static constexpr const char* objectPath = "/xyz/openbmc_project/uefivar";
+    static constexpr const char* objectPath = "/com/yadro/uefivar";
 
     /**
      * @brief Constructor.
