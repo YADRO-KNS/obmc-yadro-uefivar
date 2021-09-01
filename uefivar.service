@@ -5,7 +5,7 @@ Description=UEFI variable storage
 ExecStart=/usr/bin/env uefivar
 Restart=always
 Type=dbus
-BusName=xyz.openbmc_project.UefiVar
+BusName=com.yadro.UefiVar
 
 [Install]
 WantedBy=multi-user.target
